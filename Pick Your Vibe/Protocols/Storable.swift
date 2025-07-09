@@ -10,7 +10,7 @@ protocol Storable {
 
     associatedtype StoredType
 
-    func save(_ value: StoredType) async throws
+    func save(_ value: StoredType?) async throws
 
     func load() async throws -> StoredType?
 }

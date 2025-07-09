@@ -18,7 +18,7 @@ final class UserDefaultsVibeStorable: Storable {
         self.userDefaults = userDefaults
     }
     
-    func save(_ value: Vibe) async throws {
+    func save(_ value: Vibe?) async throws {
         let encoded = try JSONEncoder().encode(value)
         await Task.detached(priority: .userInitiated) {
             self.userDefaults.set(encoded, forKey: self.selectedVibeKey)

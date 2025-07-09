@@ -23,10 +23,12 @@ class VibePickerViewModel: VibePickerViewModelProtocol {
     
     init(vibeStorable: AnyStorable<Vibe>) {
         self.vibeStorable = vibeStorable
-        Task {
+        Task { [weak self] in
+            guard let self else { return }
             guard let savedVibe = try? await self.vibeStorable.load() else { return }
-            await MainActor.run {
-                guard let matchingVibe = vibes.first(where: { $0.emoji == savedVibe.emoji && $0.label == savedVibe.label }) else { return }
+            await MainActor.run { [weak self] in
+                guard let self else { return }
+                guard let matchingVibe = self.vibes.first(where: { $0.emoji == savedVibe.emoji && $0.label == savedVibe.label }) else { return }
                 self.selectedVibe = matchingVibe
             }
         }
@@ -34,9 +36,9 @@ class VibePickerViewModel: VibePickerViewModelProtocol {
 
     func toggleSelection(for vibe: Vibe) {
         self.selectedVibe = self.isSelected(vibe) ? nil : vibe
-        guard let selectedVibe = self.selectedVibe else { return }
-        Task {
-            try? await self.vibeStorable.save(selectedVibe)
+        Task { [weak self] in
+            guard let self else { return }
+            try? await self.vibeStorable.save(self.selectedVibe)
         }
     }
 

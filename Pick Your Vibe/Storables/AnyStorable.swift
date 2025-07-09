@@ -9,7 +9,7 @@
 final class AnyStorable<T>: Storable {
     typealias StoredType = T
 
-    private let _save: (T) async throws -> Void
+    private let _save: (T?) async throws -> Void
     private let _load: () async throws -> T?
 
     init<S: Storable>(_ store: S) where S.StoredType == T {
@@ -17,7 +17,7 @@ final class AnyStorable<T>: Storable {
         self._load = store.load
     }
 
-    func save(_ value: T) async throws {
+    func save(_ value: T?) async throws {
         try await _save(value)
     }
 
