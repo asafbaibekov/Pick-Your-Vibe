@@ -15,6 +15,8 @@ struct Vibe: Identifiable, Codable, Equatable {
     
     let label: String
     
+    var timestamp: Date = Date()
+    
     static func == (lhs: Vibe, rhs: Vibe) -> Bool {
         return lhs.emoji == rhs.emoji && lhs.label == rhs.label
     }

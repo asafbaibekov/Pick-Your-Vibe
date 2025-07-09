@@ -41,6 +41,8 @@ class VibePickerViewModel: VibePickerViewModelProtocol {
             guard let self else { return }
             var savedVibes = (try? await self.vibeStorable.load()) ?? []
             if savedVibes.last != vibe {
+                var vibe = vibe
+                vibe.timestamp = Date()
                 savedVibes.append(vibe)
                 try? await self.vibeStorable.save(savedVibes)
             }
