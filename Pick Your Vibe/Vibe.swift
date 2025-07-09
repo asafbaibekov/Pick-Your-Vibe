@@ -7,11 +7,15 @@
 
 import Foundation
 
-struct Vibe: Identifiable, Codable {
+struct Vibe: Identifiable, Codable, Equatable {
     
     private(set) var id: UUID = UUID()
     
     let emoji: String
     
     let label: String
+    
+    static func == (lhs: Vibe, rhs: Vibe) -> Bool {
+        return lhs.emoji == rhs.emoji && lhs.label == rhs.label
+    }
 }

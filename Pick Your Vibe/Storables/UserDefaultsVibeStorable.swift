@@ -18,17 +18,17 @@ final class UserDefaultsVibeStorable: Storable {
         self.userDefaults = userDefaults
     }
     
-    func save(_ value: Vibe?) async throws {
+    func save(_ value: [Vibe]?) async throws {
         let encoded = try JSONEncoder().encode(value)
         await Task.detached(priority: .userInitiated) {
             self.userDefaults.set(encoded, forKey: self.selectedVibeKey)
         }.value
     }
 
-    func load() async throws -> Vibe? {
+    func load() async throws -> [Vibe]? {
         return try await Task.detached(priority: .utility) {
             guard let data = self.userDefaults.data(forKey: self.selectedVibeKey) else { return nil }
-            return try JSONDecoder().decode(Vibe.self, from: data)
+            return try JSONDecoder().decode([Vibe].self, from: data)
         }.value
     }
 }

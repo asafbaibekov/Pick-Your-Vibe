@@ -12,7 +12,7 @@ class VibePickerViewModel: VibePickerViewModelProtocol {
     
     @Published var selectedVibe: Vibe?
     
-    private let vibeStorable: AnyStorable<Vibe>
+    private let vibeStorable: AnyStorable<[Vibe]>
 
     let vibes: [Vibe] = [
         Vibe(emoji: "🧠", label: "Focus"),
@@ -21,14 +21,15 @@ class VibePickerViewModel: VibePickerViewModelProtocol {
         Vibe(emoji: "😂", label: "Joy")
     ]
     
-    init(vibeStorable: AnyStorable<Vibe>) {
+    init(vibeStorable: AnyStorable<[Vibe]>) {
         self.vibeStorable = vibeStorable
         Task { [weak self] in
             guard let self else { return }
-            guard let savedVibe = try? await self.vibeStorable.load() else { return }
+            guard let savedVibes = try? await self.vibeStorable.load() else { return }
             await MainActor.run { [weak self] in
                 guard let self else { return }
-                guard let matchingVibe = self.vibes.first(where: { $0.emoji == savedVibe.emoji && $0.label == savedVibe.label }) else { return }
+                guard let lastSavedVibe = savedVibes.last else { return }
+                guard let matchingVibe = self.vibes.first(where: { $0.emoji == lastSavedVibe.emoji && $0.label == lastSavedVibe.label }) else { return }
                 self.selectedVibe = matchingVibe
             }
         }
@@ -38,7 +39,11 @@ class VibePickerViewModel: VibePickerViewModelProtocol {
         self.selectedVibe = vibe
         Task { [weak self] in
             guard let self else { return }
-            try? await self.vibeStorable.save(self.selectedVibe)
+            var savedVibes = (try? await self.vibeStorable.load()) ?? []
+            if savedVibes.last != vibe {
+                savedVibes.append(vibe)
+                try? await self.vibeStorable.save(savedVibes)
+            }
         }
     }
 
