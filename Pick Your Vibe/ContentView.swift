@@ -8,14 +8,11 @@
 import SwiftUI
 
 struct ContentView: View {
+
+    @StateObject var vibePickerViewModel = VibePickerViewModel()
+
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-        }
-        .padding()
+        VibePickerView(viewModel: self.vibePickerViewModel)
     }
 }
 
