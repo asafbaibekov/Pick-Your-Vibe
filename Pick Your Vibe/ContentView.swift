@@ -9,7 +9,12 @@ import SwiftUI
 
 struct ContentView: View {
 
-    @StateObject var vibePickerViewModel = VibePickerViewModel()
+    @ObservedObject var vibePickerViewModel: VibePickerViewModel
+
+    init() {
+        let storable = UserDefaultsVibeStorable().eraseToAnyStorable()
+        self.vibePickerViewModel = VibePickerViewModel(vibeStorable: storable)
+    }
 
     var body: some View {
         VibePickerView(viewModel: self.vibePickerViewModel)

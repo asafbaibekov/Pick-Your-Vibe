@@ -36,10 +36,12 @@ struct VibePickerView<ViewModel: VibePickerViewModelProtocol>: View {
                 }
 
                 if let selected = viewModel.selectedVibe {
-                    Text("Your vibe today: \(selected.emoji) \(selected.label)!")
-                        .font(.title2)
-                        .padding(.top)
-                        .transition(.opacity)
+                    VStack(spacing: 8) {
+                        Text("Your vibe today: \(selected.emoji) \(selected.label)!")
+                            .font(.title2)
+                            .transition(.opacity)
+                    }
+                    .padding(.top)
                 }
 
                 Spacer()
@@ -49,5 +51,7 @@ struct VibePickerView<ViewModel: VibePickerViewModelProtocol>: View {
 }
 
 #Preview {
-    VibePickerView(viewModel: VibePickerViewModel())
+    VibePickerView(viewModel: VibePickerViewModel(
+        vibeStorable: UserDefaultsVibeStorable().eraseToAnyStorable()
+    ))
 }
