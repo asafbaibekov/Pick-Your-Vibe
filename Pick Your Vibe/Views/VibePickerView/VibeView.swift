@@ -24,7 +24,7 @@ struct VibeView: View {
                     .font(.system(size: 50))
 
                 Text(vibe.label)
-                    .font(.headline)
+                    .font(.system(size: 24, weight: .bold, design: .rounded))
                     .foregroundColor(.white)
             }
             .frame(width: side, height: side)
