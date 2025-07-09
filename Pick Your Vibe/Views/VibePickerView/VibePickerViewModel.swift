@@ -35,7 +35,7 @@ class VibePickerViewModel: VibePickerViewModelProtocol {
     }
 
     func toggleSelection(for vibe: Vibe) {
-        self.selectedVibe = self.isSelected(vibe) ? nil : vibe
+        self.selectedVibe = vibe
         Task { [weak self] in
             guard let self else { return }
             try? await self.vibeStorable.save(self.selectedVibe)
