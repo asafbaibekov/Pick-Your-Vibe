@@ -11,4 +11,5 @@ import WidgetKit
 struct VibeEntry: TimelineEntry {
     let date: Date
     let vibe: Vibe?
+    var countThisWeek: Int? = nil
 }

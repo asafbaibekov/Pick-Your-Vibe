@@ -34,7 +34,7 @@ struct PickYourVibeWidget: Widget {
         PickYourVibeWidget()
     },
     timeline: {
-        VibeEntry(date: .now, vibe: Vibe(emoji: "😂", label: "Joy"))
-        VibeEntry(date: .now, vibe: nil)
+        VibeEntry(date: .now, vibe: Vibe(emoji: "😂", label: "Joy"), countThisWeek: 1)
+        VibeEntry(date: .now, vibe: nil, countThisWeek: nil)
     }
 )
