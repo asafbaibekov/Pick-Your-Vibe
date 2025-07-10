@@ -12,11 +12,11 @@ struct VibesEntryView: View {
 
     var body: some View {
         VStack(spacing: 8) {
-            if let last = entry.vibes.last {
-                Text(last.emoji)
+            if let vibe = entry.vibe {
+                Text(vibe.emoji)
                     .font(.system(size: 50))
 
-                Text(last.label)
+                Text(vibe.label)
                     .multilineTextAlignment(.center)
                     .font(.system(size: 24, weight: .bold, design: .rounded))
                     .foregroundColor(.white)

@@ -8,7 +8,7 @@
 
 import WidgetKit
 
-struct VibesEntry: TimelineEntry {
+struct VibeEntry: TimelineEntry {
     let date: Date
-    let vibes: [Vibe]
+    let vibe: Vibe?
 }

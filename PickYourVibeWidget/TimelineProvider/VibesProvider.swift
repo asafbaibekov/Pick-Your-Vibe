@@ -15,27 +15,22 @@ struct VibesProvider: TimelineProvider {
         self.vibeStorable = vibeStorable
     }
     
-    func placeholder(in context: Context) -> VibesEntry {
-        VibesEntry(date: .now, vibes: [])
+    func placeholder(in context: Context) -> VibeEntry {
+        VibeEntry(date: .now, vibe: nil)
     }
 
-    func getSnapshot(in context: Context, completion: @escaping (VibesEntry) -> ()) {
+    func getSnapshot(in context: Context, completion: @escaping (VibeEntry) -> ()) {
         Task {
-            let vibesEntry = try await {
-                guard let vibes = try await self.vibeStorable.load() else {
-                    return VibesEntry(date: .now, vibes: [])
-                }
-                return VibesEntry(date: Date(), vibes: vibes)
-            }()
+            let vibe = try await self.vibeStorable.load()?.last
+            let vibesEntry = VibeEntry(date: .now, vibe: vibe)
             completion(vibesEntry)
         }
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
         Task {
-            let vibes = try await self.vibeStorable.load() ?? []
-            let fiveVibes = Array(vibes.prefix(5))
-            let entry = VibesEntry(date: .now, vibes: fiveVibes)
+            let vibe = try await self.vibeStorable.load()?.last
+            let entry = VibeEntry(date: .now, vibe: vibe)
             let timeline = Timeline(entries: [entry], policy: .atEnd)
             completion(timeline)
         }
