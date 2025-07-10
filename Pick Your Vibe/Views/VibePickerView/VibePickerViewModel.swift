@@ -13,6 +13,8 @@ class VibePickerViewModel: VibePickerViewModelProtocol {
     @Published var selectedVibe: Vibe?
     
     private let vibeStorable: AnyStorable<[Vibe]>
+    
+    private(set) var onSelectedVibeChanged: (() -> Void)? = nil
 
     let vibes: [Vibe] = [
         Vibe(emoji: "🧠", label: "Focus"),
@@ -21,16 +23,16 @@ class VibePickerViewModel: VibePickerViewModelProtocol {
         Vibe(emoji: "😂", label: "Joy")
     ]
     
-    init(vibeStorable: AnyStorable<[Vibe]>) {
+    init(vibeStorable: AnyStorable<[Vibe]>, onSelectedVibeChanged: (() -> Void)? = nil) {
         self.vibeStorable = vibeStorable
+        self.onSelectedVibeChanged = onSelectedVibeChanged
         Task { [weak self] in
             guard let self else { return }
             guard let savedVibes = try? await self.vibeStorable.load() else { return }
+            guard let lastSavedVibe = savedVibes.last else { return }
+            guard let matchingVibe = self.vibes.first(where: { $0.emoji == lastSavedVibe.emoji && $0.label == lastSavedVibe.label }) else { return }
             await MainActor.run { [weak self] in
-                guard let self else { return }
-                guard let lastSavedVibe = savedVibes.last else { return }
-                guard let matchingVibe = self.vibes.first(where: { $0.emoji == lastSavedVibe.emoji && $0.label == lastSavedVibe.label }) else { return }
-                self.selectedVibe = matchingVibe
+                self?.selectedVibe = matchingVibe
             }
         }
     }
@@ -45,6 +47,9 @@ class VibePickerViewModel: VibePickerViewModelProtocol {
                 vibe.timestamp = Date()
                 savedVibes.append(vibe)
                 try? await self.vibeStorable.save(savedVibes)
+                await MainActor.run { [weak self] in
+                    self?.onSelectedVibeChanged?()
+                }
             }
         }
     }

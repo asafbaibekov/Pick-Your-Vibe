@@ -51,7 +51,8 @@ struct VibePickerView<ViewModel: VibePickerViewModelProtocol>: View {
 }
 
 #Preview {
-    VibePickerView(viewModel: VibePickerViewModel(
+    let viewModel = VibePickerViewModel(
         vibeStorable: UserDefaultsVibeStorable().eraseToAnyStorable()
-    ))
+    )
+    VibePickerView(viewModel: viewModel)
 }
