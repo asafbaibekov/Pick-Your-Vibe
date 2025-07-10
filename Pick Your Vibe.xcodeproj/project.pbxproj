@@ -6,14 +6,79 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		2D066F562E1FAA5200270F83 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D066F552E1FAA5200270F83 /* WidgetKit.framework */; };
+		2D066F582E1FAA5200270F83 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D066F572E1FAA5200270F83 /* SwiftUI.framework */; };
+		2D066F672E1FAA5300270F83 /* PickYourVibeWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 2D066F532E1FAA5200270F83 /* PickYourVibeWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		2D066F652E1FAA5300270F83 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2D066DEA2E1E894200270F83 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2D066F522E1FAA5200270F83;
+			remoteInfo = PickYourVibeWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		2D066F682E1FAA5300270F83 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				2D066F672E1FAA5300270F83 /* PickYourVibeWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		2D066DF22E1E894200270F83 /* Pick Your Vibe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pick Your Vibe.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D066F532E1FAA5200270F83 /* PickYourVibeWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PickYourVibeWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D066F552E1FAA5200270F83 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		2D066F572E1FAA5200270F83 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		2D066F6E2E1FAA8200270F83 /* PickYourVibeWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PickYourVibeWidgetExtension.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		2D066F6B2E1FAA5300270F83 /* Exceptions for "PickYourVibeWidget" folder in "PickYourVibeWidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 2D066F522E1FAA5200270F83 /* PickYourVibeWidgetExtension */;
+		};
+		2D066F732E1FAB5C00270F83 /* Exceptions for "Pick Your Vibe" folder in "PickYourVibeWidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Protocols/Storable.swift,
+				Storables/AnyStorable.swift,
+				Storables/UserDefaultsVibeStorable.swift,
+				Vibe.swift,
+			);
+			target = 2D066F522E1FAA5200270F83 /* PickYourVibeWidgetExtension */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		2D066DF42E1E894200270F83 /* Pick Your Vibe */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				2D066F732E1FAB5C00270F83 /* Exceptions for "Pick Your Vibe" folder in "PickYourVibeWidgetExtension" target */,
+			);
 			path = "Pick Your Vibe";
+			sourceTree = "<group>";
+		};
+		2D066F592E1FAA5200270F83 /* PickYourVibeWidget */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				2D066F6B2E1FAA5300270F83 /* Exceptions for "PickYourVibeWidget" folder in "PickYourVibeWidgetExtension" target */,
+			);
+			path = PickYourVibeWidget;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -26,13 +91,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		2D066F502E1FAA5200270F83 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2D066F582E1FAA5200270F83 /* SwiftUI.framework in Frameworks */,
+				2D066F562E1FAA5200270F83 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		2D066DE92E1E894200270F83 = {
 			isa = PBXGroup;
 			children = (
+				2D066F6E2E1FAA8200270F83 /* PickYourVibeWidgetExtension.entitlements */,
 				2D066DF42E1E894200270F83 /* Pick Your Vibe */,
+				2D066F592E1FAA5200270F83 /* PickYourVibeWidget */,
+				2D066F542E1FAA5200270F83 /* Frameworks */,
 				2D066DF32E1E894200270F83 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -41,8 +118,18 @@
 			isa = PBXGroup;
 			children = (
 				2D066DF22E1E894200270F83 /* Pick Your Vibe.app */,
+				2D066F532E1FAA5200270F83 /* PickYourVibeWidgetExtension.appex */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		2D066F542E1FAA5200270F83 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2D066F552E1FAA5200270F83 /* WidgetKit.framework */,
+				2D066F572E1FAA5200270F83 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -55,10 +142,12 @@
 				2D066DEE2E1E894200270F83 /* Sources */,
 				2D066DEF2E1E894200270F83 /* Frameworks */,
 				2D066DF02E1E894200270F83 /* Resources */,
+				2D066F682E1FAA5300270F83 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				2D066F662E1FAA5300270F83 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				2D066DF42E1E894200270F83 /* Pick Your Vibe */,
@@ -69,6 +158,28 @@
 			productName = "Pick Your Vibe";
 			productReference = 2D066DF22E1E894200270F83 /* Pick Your Vibe.app */;
 			productType = "com.apple.product-type.application";
+		};
+		2D066F522E1FAA5200270F83 /* PickYourVibeWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2D066F6C2E1FAA5300270F83 /* Build configuration list for PBXNativeTarget "PickYourVibeWidgetExtension" */;
+			buildPhases = (
+				2D066F4F2E1FAA5200270F83 /* Sources */,
+				2D066F502E1FAA5200270F83 /* Frameworks */,
+				2D066F512E1FAA5200270F83 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				2D066F592E1FAA5200270F83 /* PickYourVibeWidget */,
+			);
+			name = PickYourVibeWidgetExtension;
+			packageProductDependencies = (
+			);
+			productName = PickYourVibeWidgetExtension;
+			productReference = 2D066F532E1FAA5200270F83 /* PickYourVibeWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -81,6 +192,9 @@
 				LastUpgradeCheck = 1640;
 				TargetAttributes = {
 					2D066DF12E1E894200270F83 = {
+						CreatedOnToolsVersion = 16.4;
+					};
+					2D066F522E1FAA5200270F83 = {
 						CreatedOnToolsVersion = 16.4;
 					};
 				};
@@ -100,12 +214,20 @@
 			projectRoot = "";
 			targets = (
 				2D066DF12E1E894200270F83 /* Pick Your Vibe */,
+				2D066F522E1FAA5200270F83 /* PickYourVibeWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		2D066DF02E1E894200270F83 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2D066F512E1FAA5200270F83 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -122,7 +244,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		2D066F4F2E1FAA5200270F83 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2D066F662E1FAA5300270F83 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2D066F522E1FAA5200270F83 /* PickYourVibeWidgetExtension */;
+			targetProxy = 2D066F652E1FAA5300270F83 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		2D066DFB2E1E894300270F83 /* Debug */ = {
@@ -249,8 +386,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Pick Your Vibe/Pick Your Vibe.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = F3UN458E33;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -276,8 +415,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Pick Your Vibe/Pick Your Vibe.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = F3UN458E33;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -292,6 +433,62 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.asafbaibekov.Pick-Your-Vibe";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		2D066F692E1FAA5300270F83 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = PickYourVibeWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = F3UN458E33;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PickYourVibeWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PickYourVibeWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.asafbaibekov.Pick-Your-Vibe.PickYourVibeWidget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		2D066F6A2E1FAA5300270F83 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = PickYourVibeWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = F3UN458E33;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PickYourVibeWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PickYourVibeWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.asafbaibekov.Pick-Your-Vibe.PickYourVibeWidget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -315,6 +512,15 @@
 			buildConfigurations = (
 				2D066DFE2E1E894300270F83 /* Debug */,
 				2D066DFF2E1E894300270F83 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2D066F6C2E1FAA5300270F83 /* Build configuration list for PBXNativeTarget "PickYourVibeWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2D066F692E1FAA5300270F83 /* Debug */,
+				2D066F6A2E1FAA5300270F83 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

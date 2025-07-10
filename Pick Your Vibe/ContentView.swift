@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import WidgetKit
 
 struct ContentView: View {
 
@@ -13,7 +14,12 @@ struct ContentView: View {
 
     init() {
         let storable = UserDefaultsVibeStorable().eraseToAnyStorable()
-        self.vibePickerViewModel = VibePickerViewModel(vibeStorable: storable)
+        self.vibePickerViewModel = VibePickerViewModel(
+            vibeStorable: storable,
+            onSelectedVibeChanged: {
+                WidgetCenter.shared.reloadTimelines(ofKind: "PickYourVibeWidget")
+            }
+        )
     }
 
     var body: some View {
