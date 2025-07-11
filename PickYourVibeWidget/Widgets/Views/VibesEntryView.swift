@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import ClockHandRotationKit
 
 struct VibesEntryView: View {
     var entry: VibesProvider.Entry
@@ -14,14 +15,23 @@ struct VibesEntryView: View {
         VStack(spacing: 8) {
             if let vibe = entry.vibe {
                 HStack {
-                    Text(vibe.emoji)
-                        .font(.system(size: 36))
-
+                    if entry.countThisWeek?.isMultiple(of: 7) ?? false {
+                        Text(vibe.emoji)
+                            .font(.system(size: 36))
+                            .offset(x: 0, y: -5)
+                            .swingAnimation(duration: 2, direction: .vertical, distance: 10)
+                    } else {
+                        Text(vibe.emoji)
+                            .font(.system(size: 36))
+                    }
+                    
                     Text(vibe.label)
                         .multilineTextAlignment(.center)
                         .font(.system(size: 24, weight: .bold, design: .rounded))
                         .foregroundColor(.white)
                 }
+                
+                
                 
                 if let countThisWeek = entry.countThisWeek {
                     Text("You’ve picked \(countThisWeek)\nvibes this week.")
