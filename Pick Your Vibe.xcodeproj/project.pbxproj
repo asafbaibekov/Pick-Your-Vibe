@@ -34,6 +34,16 @@
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		2D0671EB2E20F49E00270F83 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +74,19 @@
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
+/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+		2D0671EC2E20F49E00270F83 /* Exceptions for "PickYourVibeWidget" folder in "Embed Frameworks" phase from "PickYourVibeWidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
+			attributesByRelativePath = {
+				Frameworks/ClockHandRotationKit.xcframework = (CodeSignOnCopy, RemoveHeadersOnCopy, );
+			};
+			buildPhase = 2D0671EB2E20F49E00270F83 /* Embed Frameworks */;
+			membershipExceptions = (
+				Frameworks/ClockHandRotationKit.xcframework,
+			);
+		};
+/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		2D066DF42E1E894200270F83 /* Pick Your Vibe */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
@@ -77,6 +100,7 @@
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				2D066F6B2E1FAA5300270F83 /* Exceptions for "PickYourVibeWidget" folder in "PickYourVibeWidgetExtension" target */,
+				2D0671EC2E20F49E00270F83 /* Exceptions for "PickYourVibeWidget" folder in "Embed Frameworks" phase from "PickYourVibeWidgetExtension" target */,
 			);
 			path = PickYourVibeWidget;
 			sourceTree = "<group>";
@@ -166,6 +190,7 @@
 				2D066F4F2E1FAA5200270F83 /* Sources */,
 				2D066F502E1FAA5200270F83 /* Frameworks */,
 				2D066F512E1FAA5200270F83 /* Resources */,
+				2D0671EB2E20F49E00270F83 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
