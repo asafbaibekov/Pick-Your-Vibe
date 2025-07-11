@@ -11,6 +11,9 @@ import WidgetKit
 struct ContentView: View {
 
     @ObservedObject var vibePickerViewModel: VibePickerViewModel
+    
+    @State private var showVibePopup = false
+    @State private var vibePopupViewModel: VibePopupViewModel?
 
     init() {
         let storable = UserDefaultsVibeStorable().eraseToAnyStorable()
@@ -23,7 +26,20 @@ struct ContentView: View {
     }
 
     var body: some View {
-        VibePickerView(viewModel: self.vibePickerViewModel)
+        ZStack {
+            VibePickerView(viewModel: self.vibePickerViewModel)
+                .onOpenURL { url in
+                    vibePopupViewModel = VibePopupViewModel(url: url)
+                    showVibePopup = true
+                }
+            
+            if showVibePopup, let vibePopupViewModel = vibePopupViewModel {
+                VibePopupView(
+                    vibePopupViewModel: vibePopupViewModel,
+                    isPresented: $showVibePopup
+                )
+            }
+        }
     }
 }
 

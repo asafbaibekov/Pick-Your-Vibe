@@ -34,11 +34,7 @@ struct VibeView: View {
                 RoundedRectangle(cornerRadius: 16)
                     .stroke(isSelected ? Color.blue : Color.clear, lineWidth: 3)
             )
-            .onTapGesture {
-                withAnimation {
-                    onTap?()
-                }
-            }
+            .bounceOnTap(onTap)
             .animation(.easeInOut(duration: 0.1), value: isSelected)
         }
         .aspectRatio(1, contentMode: .fit)

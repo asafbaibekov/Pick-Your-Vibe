@@ -49,5 +49,29 @@ struct VibesEntryView: View {
                     .foregroundColor(.white)
             }
         }
+        .widgetURL(createWidgetURL())
+    }
+}
+
+private extension VibesEntryView {
+    
+    func createWidgetURL() -> URL? {
+        guard let vibe = entry.vibe else {
+            return URL(string: "pickyourvibe://app")
+        }
+        
+        var components = URLComponents()
+        components.scheme = "pickyourvibe"
+        components.host = "widget"
+        components.queryItems = [
+            URLQueryItem(name: "emoji", value: vibe.emoji),
+            URLQueryItem(name: "label", value: vibe.label)
+        ]
+        
+        if let countThisWeek = entry.countThisWeek {
+            components.queryItems?.append(URLQueryItem(name: "count", value: String(countThisWeek)))
+        }
+        
+        return components.url
     }
 }
