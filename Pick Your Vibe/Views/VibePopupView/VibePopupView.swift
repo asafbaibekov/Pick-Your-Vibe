@@ -12,19 +12,21 @@ struct VibePopupView: View {
     let vibePopupViewModel: VibePopupViewModel
     
     @Binding var isPresented: Bool
+    @State private var contentOffset: CGFloat = 400
+    @State private var backgroundOpacity: Double = 0
     
     var body: some View {
         ZStack {
-            Color.black.opacity(0.4)
+            Color.black.opacity(backgroundOpacity)
                 .ignoresSafeArea()
                 .onTapGesture {
-                    isPresented = false
+                    dismissWithAnimation()
                 }
             
             VStack(spacing: 16) {
                 HStack {
                     Spacer()
-                    Button(action: { isPresented = false }) {
+                    Button(action: { dismissWithAnimation() }) {
                         Image(systemName: "xmark.circle.fill")
                             .font(.title2)
                             .foregroundColor(.gray)
@@ -62,8 +64,41 @@ struct VibePopupView: View {
             )
             .padding(.horizontal, 40)
             .frame(maxHeight: 300)
+            .offset(y: contentOffset)
         }
-        .animation(.easeInOut(duration: 0.3), value: isPresented)
+        .onAppear {
+            presentWithAnimation()
+        }
+        .onChange(of: isPresented) {
+            if !isPresented {
+                dismissWithAnimation()
+            }
+        }
+    }
+}
+
+private extension VibePopupView {
+
+    func presentWithAnimation() {
+        withAnimation(.easeOut(duration: 0.2).delay(0.1)) {
+            contentOffset = 0
+        }
+        withAnimation(.easeOut(duration: 0.2)) {
+            backgroundOpacity = 0.4
+        }
+    }
+    
+    func dismissWithAnimation() {
+        withAnimation(.easeIn(duration: 0.2).delay(0.1)) {
+            contentOffset = 400
+        }
+        withAnimation(.easeIn(duration: 0.2)) {
+            backgroundOpacity = 0
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            isPresented = false
+        }
     }
 }
 
