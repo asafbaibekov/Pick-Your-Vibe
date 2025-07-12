@@ -17,21 +17,27 @@ struct VibeView: View {
 
     var body: some View {
         GeometryReader { geometry in
-            let side = geometry.size.width
-
+            let side = min(geometry.size.width, geometry.size.height)
+            
+            let emojiSize: CGFloat = min(50, side * 0.3)
+            let labelSize: CGFloat = min(24, side * 0.15)
+            
             VStack(spacing: 8) {
                 Text(vibe.emoji)
-                    .font(.system(size: 50))
+                    .font(.system(size: emojiSize))
 
                 Text(vibe.label)
-                    .font(.system(size: 24, weight: .bold, design: .rounded))
+                    .font(.system(size: labelSize, weight: .bold, design: .rounded))
                     .foregroundColor(.white)
+                    .multilineTextAlignment(.center)
+                    .lineLimit(2)
+                    .minimumScaleFactor(0.8)
             }
             .frame(width: side, height: side)
             .background(Color.blue.opacity(0.3))
-            .clipShape(RoundedRectangle(cornerRadius: 16))
+            .clipShape(RoundedRectangle(cornerRadius: min(16, side * 0.1)))
             .overlay(
-                RoundedRectangle(cornerRadius: 16)
+                RoundedRectangle(cornerRadius: min(16, side * 0.1))
                     .stroke(isSelected ? Color.blue : Color.clear, lineWidth: 3)
             )
             .bounceOnTap(onTap)
@@ -41,12 +47,50 @@ struct VibeView: View {
     }
 }
 
-#Preview {
+#Preview("Portrait", traits: .portrait) {
     @Previewable @State var isSelected = true
     let vibe = Vibe(emoji: "😂", label: "Joy")
 
-    VibeView(vibe: vibe, isSelected: isSelected) {
-        isSelected.toggle()
+    VStack {
+        VibeView(vibe: vibe, isSelected: isSelected) {
+            isSelected.toggle()
+        }
+        .frame(width: 100)
+        .padding(.vertical, 24)
+        
+        VibeView(vibe: vibe, isSelected: isSelected) {
+            isSelected.toggle()
+        }
+        .frame(width: 130)
+        .padding(.vertical, 24)
+        
+        VibeView(vibe: vibe, isSelected: isSelected) {
+            isSelected.toggle()
+        }
+        .padding(.vertical, 24)
     }
-    .padding(24)
+}
+
+#Preview("LandscapeLeft", traits: .landscapeLeft) {
+    @Previewable @State var isSelected = true
+    let vibe = Vibe(emoji: "😂", label: "Joy")
+
+    HStack {
+        VibeView(vibe: vibe, isSelected: isSelected) {
+            isSelected.toggle()
+        }
+        .frame(width: 100)
+        .padding(.vertical, 24)
+        
+        VibeView(vibe: vibe, isSelected: isSelected) {
+            isSelected.toggle()
+        }
+        .frame(width: 130)
+        .padding(.vertical, 24)
+        
+        VibeView(vibe: vibe, isSelected: isSelected) {
+            isSelected.toggle()
+        }
+        .padding(.vertical, 24)
+    }
 }

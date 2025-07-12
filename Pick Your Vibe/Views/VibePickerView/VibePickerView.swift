@@ -15,37 +15,70 @@ struct VibePickerView<ViewModel: VibePickerViewModelProtocol>: View {
     let spacing: CGFloat = 16
 
     var body: some View {
-        NavigationView {
-            VStack {
-                Text("Pick Your Vibe")
-                    .font(.largeTitle)
-                    .padding(.top)
+        NavigationStack {
+            GeometryReader { geometry in
+                let isLandscape = geometry.size.width > geometry.size.height
+                let columns = adaptiveColumns(
+                    for: geometry.size,
+                    isLandscape: isLandscape
+                )
+                
+                VStack(spacing: 0) {
+                    Text("Pick Your Vibe")
+                        .font(.largeTitle)
+                        .padding(.vertical, 8)
 
-                ScrollView {
-                    LazyVGrid(columns: [
-                        GridItem(.flexible(), spacing: spacing),
-                        GridItem(.flexible())
-                    ], spacing: spacing) {
-                        ForEach(viewModel.vibes) { vibe in
-                            VibeView(vibe: vibe, isSelected: viewModel.isSelected(vibe)) {
-                                viewModel.toggleSelection(for: vibe)
+                    ScrollView {
+                        LazyVGrid(columns: columns, spacing: spacing) {
+                            ForEach(viewModel.vibes) { vibe in
+                                VibeView(vibe: vibe, isSelected: viewModel.isSelected(vibe)) {
+                                    viewModel.toggleSelection(for: vibe)
+                                }
                             }
                         }
+                        .padding()
                     }
-                    .padding()
-                }
 
-                if let selected = viewModel.selectedVibe {
-                    VStack(spacing: 8) {
-                        Text("Your vibe today: \(selected.emoji) \(selected.label)!")
-                            .font(.title2)
-                            .transition(.opacity)
+                    if let selected = viewModel.selectedVibe {
+                        VStack(spacing: 8) {
+                            Text("Your vibe today: \(selected.emoji) \(selected.label)!")
+                                .font(isLandscape ? .title3 : .title2)
+                                .multilineTextAlignment(.center)
+                                .transition(.opacity)
+                        }
+                        .padding(.vertical)
                     }
-                    .padding(.top)
                 }
-
-                Spacer()
             }
+        }
+    }
+}
+
+private extension VibePickerView {
+    
+    func adaptiveColumns(for size: CGSize, isLandscape: Bool) -> [GridItem] {
+        let availableWidth = size.width - (spacing * 3)
+
+        let minItemWidth: CGFloat = 120
+        let maxItemWidth: CGFloat = 200
+
+        if isLandscape {
+            let columnsCount = max(2, min(6, Int(availableWidth / minItemWidth)))
+            return Array(
+                repeating: GridItem(
+                    .flexible(
+                        minimum: minItemWidth,
+                        maximum: maxItemWidth
+                    ),
+                    spacing: spacing
+                ),
+                count: columnsCount
+            )
+        } else {
+            return [
+                GridItem(.flexible(minimum: minItemWidth, maximum: maxItemWidth), spacing: spacing),
+                GridItem(.flexible(minimum: minItemWidth, maximum: maxItemWidth))
+            ]
         }
     }
 }

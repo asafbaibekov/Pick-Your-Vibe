@@ -20,6 +20,18 @@ class VibePickerViewModel: VibePickerViewModelProtocol {
         Vibe(emoji: "🧠", label: "Focus"),
         Vibe(emoji: "💪", label: "Power"),
         Vibe(emoji: "😴", label: "Chill"),
+        Vibe(emoji: "😂", label: "Joy"),
+        Vibe(emoji: "🧠", label: "Focus"),
+        Vibe(emoji: "💪", label: "Power"),
+        Vibe(emoji: "😴", label: "Chill"),
+        Vibe(emoji: "😂", label: "Joy"),
+        Vibe(emoji: "🧠", label: "Focus"),
+        Vibe(emoji: "💪", label: "Power"),
+        Vibe(emoji: "😴", label: "Chill"),
+        Vibe(emoji: "😂", label: "Joy"),
+        Vibe(emoji: "🧠", label: "Focus"),
+        Vibe(emoji: "💪", label: "Power"),
+        Vibe(emoji: "😴", label: "Chill"),
         Vibe(emoji: "😂", label: "Joy")
     ]
     
