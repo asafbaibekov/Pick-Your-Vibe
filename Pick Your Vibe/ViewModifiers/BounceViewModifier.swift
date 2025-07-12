@@ -29,20 +29,31 @@ struct BounceViewModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
             .scaleEffect(internalTapping ? config.pressScale : 1)
-            .gesture(
+            .simultaneousGesture(
                 DragGesture(minimumDistance: 0)
-                    .onChanged { _ in
-                        withAnimation(.smooth(duration: config.pressDuration)) {
-                            internalTapping = true
+                    .onChanged { value in
+                        let dragDistance = sqrt(pow(value.translation.width, 2) + pow(value.translation.height, 2))
+                        if dragDistance < 10 {
+                            withAnimation(.smooth(duration: config.pressDuration)) {
+                                internalTapping = true
+                            }
+                            tapping?.wrappedValue = true
                         }
-                        tapping?.wrappedValue = true
                     }
-                    .onEnded { _ in
-                        withAnimation(.bouncy(duration: config.releaseDuration, extraBounce: config.releaseExtraBounce)) {
-                            internalTapping = false
+                    .onEnded { value in
+                        let dragDistance = sqrt(pow(value.translation.width, 2) + pow(value.translation.height, 2))
+                        if dragDistance < 10 {
+                            withAnimation(.bouncy(duration: config.releaseDuration, extraBounce: config.releaseExtraBounce)) {
+                                internalTapping = false
+                            }
+                            tapping?.wrappedValue = false
+                            onTap?()
+                        } else {
+                            withAnimation(.smooth(duration: config.pressDuration)) {
+                                internalTapping = false
+                            }
+                            tapping?.wrappedValue = false
                         }
-                        tapping?.wrappedValue = false
-                        onTap?()
                     }
             )
     }
